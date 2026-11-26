@@ -20,11 +20,55 @@ How to check each source:
 <!-- VERIFICATION_TABLE_START -->
 | Series | Source & ID | Observation date | Dashboard value | Source value | Match? | Checked on | Notes |
 |---|---|---|---|---|---|---|---|
+| FIX exchange rate, MXN per USD (date of determination) | [Banxico SIE SF43718](https://www.banxico.org.mx/tipcamb/tipCamMIAction.do?idioma=sp) | 2024-01-02 | 17.0297 |  |  |  | fixed check; FIX dated by determination date |
+| FIX exchange rate, MXN per USD (date of determination) | [Banxico SIE SF43718](https://www.banxico.org.mx/tipcamb/tipCamMIAction.do?idioma=sp) | 2026-11-25 | 19.704 |  |  |  | FIX dated by determination date |
+| Banxico target for the overnight interbank interest rate | [Banxico SIE SF61745](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html) | 2024-01-01 | 11.25 |  |  |  | fixed check |
+| Banxico target for the overnight interbank interest rate | [Banxico SIE SF61745](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html) | 2026-11-26 | 6.25 |  |  |  |  |
+| 10-year fixed-rate Bono M, weighted yield at primary auction | [Banxico SIE SF44071](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=18&accion=consultarCuadro&idCuadro=CF107&locale=es) | 2023-12-14 | 9.39 |  |  |  | fixed check; auction date |
+| 10-year fixed-rate Bono M, weighted yield at primary auction | [Banxico SIE SF44071](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=18&accion=consultarCuadro&idCuadro=CF107&locale=es) | 2026-11-19 | 9.28 |  |  |  | auction date |
+| Banxico bilateral real exchange rate index vs the US (consumer prices) | [Banxico SIE SR1504](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=2&accion=consultarCuadro&idCuadro=CR183&locale=es) | 2024-01-01 | 92.3811 |  |  |  | fixed check; dashboard index (sample average = 100): 85.29; month 2024-01 |
+| Banxico bilateral real exchange rate index vs the US (consumer prices) | [Banxico SIE SR1504](https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=2&accion=consultarCuadro&idCuadro=CR183&locale=es) | 2026-10-01 | 98.8539 |  |  |  | dashboard index (sample average = 100): 91.27; month 2026-10 |
+| Real GDP, millions of 2018 pesos, seasonally adjusted | [INEGI BIE 736181](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=736181) | 2024-01-01 | 25,362,402.9 |  |  |  | fixed check; Quarter 2024Q1; dashboard y/y 2.24% |
+| Real GDP, millions of 2018 pesos, seasonally adjusted | [INEGI BIE 736181](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=736181) | 2026-07-01 | 26,400,349.0 |  |  |  | Quarter 2026Q3; dashboard y/y 3.27% |
+| IGAE (monthly economic activity index), seasonally adjusted, 2018=100 | [INEGI BIE 737219](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=737219) | 2024-01-01 | 104.5521 |  |  |  | fixed check; dashboard y/y 1.92%; month 2024-01 |
+| IGAE (monthly economic activity index), seasonally adjusted, 2018=100 | [INEGI BIE 737219](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=737219) | 2026-09-01 | 108.3126 |  |  |  | dashboard y/y 3.03%; month 2026-09 |
+| INPC headline index (base 2nd half of July 2018 = 100; 2024 basket update) | [INEGI BIE 910392](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910392) | 2024-01-01 | 133.555 |  |  |  | fixed check; dashboard y/y 4.88%; month 2024-01 |
+| INPC headline index (base 2nd half of July 2018 = 100; 2024 basket update) | [INEGI BIE 910392](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910392) | 2026-10-01 | 147.026 |  |  |  | dashboard y/y 3.75%; month 2026-10 |
+| INPC core (subyacente) index (base 2nd half of July 2018 = 100; 2024 basket update) | [INEGI BIE 910393](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910393) | 2024-01-01 | 132.2912 |  |  |  | fixed check; dashboard y/y 4.76%; month 2024-01 |
+| INPC core (subyacente) index (base 2nd half of July 2018 = 100; 2024 basket update) | [INEGI BIE 910393](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910393) | 2026-10-01 | 147.014 |  |  |  | dashboard y/y 3.80%; month 2026-10 |
+| Unemployment rate (ENOE monthly, national, 15+), seasonally adjusted | [INEGI BIE 444884](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=444884) | 2024-01-01 | 2.7803 |  |  |  | fixed check; month 2024-01 |
+| Unemployment rate (ENOE monthly, national, 15+), seasonally adjusted | [INEGI BIE 444884](https://www.inegi.org.mx/app/indicadores/?tm=0&ind=444884) | 2026-09-01 | 2.6335 |  |  |  | month 2026-09 |
+| Effective federal funds rate | [FRED DFF](https://fred.stlouisfed.org/series/DFF) | 2024-01-01 | 5.33 |  |  |  | fixed check |
+| Effective federal funds rate | [FRED DFF](https://fred.stlouisfed.org/series/DFF) | 2026-11-24 | 3.88 |  |  |  |  |
+| Federal funds target range, lower limit | [FRED DFEDTARL](https://fred.stlouisfed.org/series/DFEDTARL) | 2024-01-01 | 5.25 |  |  |  | fixed check |
+| Federal funds target range, lower limit | [FRED DFEDTARL](https://fred.stlouisfed.org/series/DFEDTARL) | 2026-11-25 | 3.75 |  |  |  |  |
+| Federal funds target range, upper limit | [FRED DFEDTARU](https://fred.stlouisfed.org/series/DFEDTARU) | 2024-01-01 | 5.5 |  |  |  | fixed check |
+| Federal funds target range, upper limit | [FRED DFEDTARU](https://fred.stlouisfed.org/series/DFEDTARU) | 2026-11-25 | 4 |  |  |  |  |
+| US CPI, all urban consumers, all items, SA | [FRED CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL) | 2024-01-01 | 309.698 |  |  |  | fixed check; month 2024-01 |
+| US CPI, all urban consumers, all items, SA | [FRED CPIAUCSL](https://fred.stlouisfed.org/series/CPIAUCSL) | 2026-10-01 | 337.476 |  |  |  | month 2026-10 |
+| US 10-year Treasury constant maturity yield | [FRED DGS10](https://fred.stlouisfed.org/series/DGS10) | 2024-01-02 | 3.95 |  |  |  | fixed check |
+| US 10-year Treasury constant maturity yield | [FRED DGS10](https://fred.stlouisfed.org/series/DGS10) | 2026-11-24 | 4.91 |  |  |  |  |
 <!-- VERIFICATION_TABLE_END -->
 
 ## Automated sanity checks (latest run)
 
-Run started ? UTC; overall status **?**; run ID local.
+Run started 2026-11-26 04:23 UTC; overall status **success**; run ID 45754849516.
 
 | Series | ID | Fetch status | Latest observation | Sanity rule | Result | Detail |
 |---|---|---|---|---|---|---|
+| fix | SF43718 | ok | 2026-11-25 | value between 10 and 30 | pass | 2992 values checked, min 14.56, max 25.12 |
+| banxico_target | SF61745 | ok | 2026-11-26 | value is a multiple of 0.25 | pass | 4336 values checked, min 3, max 11.25 |
+| mbono10 | SF44071 | ok | 2026-11-19 | value between 0 and 20 | pass | 109 values checked, min 5.31, max 10.43 |
+| rer_banxico | SR1504 | ok | 2026-10-01 | rebased_avg between 30 and 300 | pass | 142 values checked, min 84.45, max 127.3 |
+| gdp | 736181 | ok | 2026-07-01 | yoy between -25 and 25 | pass | 47 values checked, min -20.47, max 22.51 |
+| igae | 737219 | ok | 2026-09-01 | yoy between -30 and 30 | pass | 141 values checked, min -23.25, max 27.66 |
+| inpc | 910392 | ok | 2026-10-01 | yoy between -5 and 30 | pass | 142 values checked, min 2.131, max 8.7 |
+| inpc_core | 910393 | ok | 2026-10-01 | yoy between -5 and 30 | pass | 142 values checked, min 2.299, max 8.515 |
+| unemployment | 444884 | ok | 2026-09-01 | value between 0 and 15 | pass | 138 values checked, min 2.492, max 5.011 |
+| dff | DFF | ok | 2026-11-24 | value between 0 and 20 | pass | 4346 values checked, min 0.04, max 5.33 |
+| fed_lower | DFEDTARL | ok | 2026-11-25 | value is a multiple of 0.25 | pass | 4347 values checked, min 0, max 5.25 |
+| fed_upper | DFEDTARU | ok | 2026-11-25 | value is a multiple of 0.25 | pass | 4347 values checked, min 0.25, max 5.5 |
+| cpi_us | CPIAUCSL | ok | 2026-10-01 | value between 100 and 1000 | pass | 141 values checked, min 234.7, max 337.5 |
+| ust10 | DGS10 | ok | 2026-11-24 | value between 0 and 20 | pass | 2975 values checked, min 0.52, max 5.31 |
+
+Real exchange rate cross-check: correlation between the own calculation and Banxico's SR1504 (both sample average = 100) is **0.999** over 141 months (2015-01 to 2026-10).
