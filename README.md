@@ -60,7 +60,7 @@ All IDs were checked in the official catalogs on 2026-11-24:
 ### Real exchange rate: correlation of the two versions
 
 <!-- RER_CORRELATION_START -->
-Not computed yet: it appears here after the first refresh that has both series.
+Latest run: correlation between the own RER and Banxico's SR1504, both rebased to 2015 = 100, is **0.999** (141 months, 2015-01 to 2026-10). Updated automatically by `scripts/verify_sample.py`.
 <!-- RER_CORRELATION_END -->
 
 ## Streamlit app

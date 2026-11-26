@@ -1,0 +1,396 @@
+{
+  "title": "Mexico macro dashboard",
+  "last_successful_refresh_utc": "2026-11-26 03:57",
+  "last_successful_refresh_mexico_city": "2026-11-25 21:57",
+  "run_started_utc": "2026-11-26 03:57",
+  "run_finished_utc": "2026-11-26 03:57",
+  "run_id": "45752104668",
+  "run_url": "https://github.com/qmancodes/MXN-dashboard/actions/runs/45752104668",
+  "repository": "qmancodes/MXN-dashboard",
+  "overall_status": "success",
+  "failed_series": [],
+  "display_start": "2015-01-01",
+  "series": {
+    "fix": {
+      "id": "SF43718",
+      "name": "FIX exchange rate, MXN per USD (date of determination)",
+      "source": "Banco de México (SIE)",
+      "source_code": "banxico",
+      "source_url": "https://www.banxico.org.mx/tipcamb/tipCamMIAction.do?idioma=sp",
+      "source_title": "Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)",
+      "units": "MXN per 1 USD",
+      "frequency": "business-daily",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "ma20 = mean of the last 20 business-day observations",
+      "latest_observation_date": "2026-11-25",
+      "latest_value": 19.704,
+      "rows": 3243,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 10 and 30",
+        "passed": true,
+        "detail": "2992 values checked, min 14.56, max 25.12"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:25Z"
+    },
+    "banxico_target": {
+      "id": "SF61745",
+      "name": "Banxico target for the overnight interbank interest rate",
+      "source": "Banco de México (SIE)",
+      "source_code": "banxico",
+      "source_url": "https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/anuncios-politica-monetaria-t.html",
+      "source_title": "Tasa objetivo",
+      "units": "% per year",
+      "frequency": "daily",
+      "seasonal_adjustment": "Not applicable",
+      "transformation": "decision = 1 on the first day a new target level is in force (value_t != value_{t-1})",
+      "latest_observation_date": "2026-11-26",
+      "latest_value": 6.25,
+      "rows": 4700,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value is a multiple of 0.25",
+        "passed": true,
+        "detail": "4336 values checked, min 3, max 11.25"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:26Z"
+    },
+    "mbono10": {
+      "id": "SF44071",
+      "name": "10-year fixed-rate Bono M, weighted yield at primary auction",
+      "source": "Banco de México (SIE)",
+      "source_code": "banxico",
+      "source_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=18&accion=consultarCuadro&idCuadro=CF107&locale=es",
+      "source_title": "Valores Gubernamentales    Resultados de la subasta semanal Tasa de rendimiento  Bono tasa fija 10 años",
+      "units": "% per year",
+      "frequency": "auction",
+      "seasonal_adjustment": "Not applicable",
+      "transformation": "none (auction-date observations); monthly mean of auctions in yields_monthly.csv",
+      "latest_observation_date": "2026-11-19",
+      "latest_value": 9.28,
+      "rows": 118,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 0 and 20",
+        "passed": true,
+        "detail": "109 values checked, min 5.31, max 10.43"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:27Z"
+    },
+    "rer_banxico": {
+      "id": "SR1504",
+      "name": "Banxico bilateral real exchange rate index vs the US (consumer prices)",
+      "source": "Banco de México (SIE)",
+      "source_code": "banxico",
+      "source_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=2&accion=consultarCuadro&idCuadro=CR183&locale=es",
+      "source_title": "Índice de tipo de cambio real bilateral con los EUA",
+      "units": "Index (Banxico base; increase = real depreciation of the peso)",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "rebased_2015 = 100 × value_t / mean(value over 2015)",
+      "latest_observation_date": "2026-10-01",
+      "latest_value": 98.3937778966294,
+      "rows": 154,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "rebased_2015 between 30 and 300",
+        "passed": true,
+        "detail": "142 values checked, min 91.05, max 137.2"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:27Z"
+    },
+    "gdp": {
+      "id": "736181",
+      "name": "Real GDP, millions of 2018 pesos, seasonally adjusted",
+      "source": "INEGI (BIE)",
+      "source_code": "inegi",
+      "source_url": "https://www.inegi.org.mx/app/indicadores/?tm=0&ind=736181",
+      "source_title": "",
+      "units": "Millions of pesos at 2018 prices",
+      "frequency": "quarterly",
+      "seasonal_adjustment": "Seasonally adjusted (INEGI)",
+      "transformation": "yoy = 100 × (GDP_t / GDP_{t-4} − 1); qoq = 100 × (GDP_t / GDP_{t-1} − 1), not annualized",
+      "latest_observation_date": "2026-07-01",
+      "latest_value": 26400349.0046794,
+      "rows": 51,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "yoy between -25 and 25",
+        "passed": true,
+        "detail": "47 values checked, min -20.47, max 22.51"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:29Z"
+    },
+    "igae": {
+      "id": "737219",
+      "name": "IGAE (monthly economic activity index), seasonally adjusted, 2018=100",
+      "source": "INEGI (BIE)",
+      "source_code": "inegi",
+      "source_url": "https://www.inegi.org.mx/app/indicadores/?tm=0&ind=737219",
+      "source_title": "",
+      "units": "Index 2018=100",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Seasonally adjusted (INEGI)",
+      "transformation": "yoy = 100 × (IGAE_t / IGAE_{t-12} − 1)",
+      "latest_observation_date": "2026-09-01",
+      "latest_value": 108.312617285931,
+      "rows": 153,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "yoy between -30 and 30",
+        "passed": true,
+        "detail": "141 values checked, min -23.25, max 27.66"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:31Z"
+    },
+    "inpc": {
+      "id": "910392",
+      "name": "INPC headline index (base 2nd half of July 2018 = 100; 2024 basket update)",
+      "source": "INEGI (BIE)",
+      "source_code": "inegi",
+      "source_url": "https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910392",
+      "source_title": "",
+      "units": "Index, 2Q July 2018 = 100",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "yoy = 100 × (INPC_t / INPC_{t-12} − 1)",
+      "latest_observation_date": "2026-10-01",
+      "latest_value": 147.026,
+      "rows": 154,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "yoy between -5 and 30",
+        "passed": true,
+        "detail": "142 values checked, min 2.131, max 8.7"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:33Z"
+    },
+    "inpc_core": {
+      "id": "910393",
+      "name": "INPC core (subyacente) index (base 2nd half of July 2018 = 100; 2024 basket update)",
+      "source": "INEGI (BIE)",
+      "source_code": "inegi",
+      "source_url": "https://www.inegi.org.mx/app/indicadores/?tm=0&ind=910393",
+      "source_title": "",
+      "units": "Index, 2Q July 2018 = 100",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "yoy = 100 × (core_t / core_{t-12} − 1)",
+      "latest_observation_date": "2026-10-01",
+      "latest_value": 147.0140441191,
+      "rows": 154,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "yoy between -5 and 30",
+        "passed": true,
+        "detail": "142 values checked, min 2.299, max 8.515"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:35Z"
+    },
+    "unemployment": {
+      "id": "444884",
+      "name": "Unemployment rate (ENOE monthly, national, 15+), seasonally adjusted",
+      "source": "INEGI (BIE)",
+      "source_code": "inegi",
+      "source_url": "https://www.inegi.org.mx/app/indicadores/?tm=0&ind=444884",
+      "source_title": "",
+      "units": "% of the economically active population",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Seasonally adjusted (INEGI)",
+      "transformation": "none; Apr–Jun 2020 forced to missing (ETOE telephone survey replaced ENOE), never interpolated",
+      "latest_observation_date": "2026-09-01",
+      "latest_value": 2.63351319216119,
+      "rows": 150,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 0 and 15",
+        "passed": true,
+        "detail": "138 values checked, min 2.492, max 5.011"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:36Z"
+    },
+    "dff": {
+      "id": "DFF",
+      "name": "Effective federal funds rate",
+      "source": "Federal Reserve Bank of St. Louis (FRED)",
+      "source_code": "fred",
+      "source_url": "https://fred.stlouisfed.org/series/DFF",
+      "source_title": "DFF",
+      "units": "% per year",
+      "frequency": "daily",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "none",
+      "latest_observation_date": "2026-11-24",
+      "latest_value": 3.88,
+      "rows": 4711,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 0 and 20",
+        "passed": true,
+        "detail": "4346 values checked, min 0.04, max 5.33"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:37Z"
+    },
+    "fed_lower": {
+      "id": "DFEDTARL",
+      "name": "Federal funds target range, lower limit",
+      "source": "Federal Reserve Bank of St. Louis (FRED)",
+      "source_code": "fred",
+      "source_url": "https://fred.stlouisfed.org/series/DFEDTARL",
+      "source_title": "DFEDTARL",
+      "units": "% per year",
+      "frequency": "daily",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "none",
+      "latest_observation_date": "2026-11-25",
+      "latest_value": 3.75,
+      "rows": 4712,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value is a multiple of 0.25",
+        "passed": true,
+        "detail": "4347 values checked, min 0, max 5.25"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:38Z"
+    },
+    "fed_upper": {
+      "id": "DFEDTARU",
+      "name": "Federal funds target range, upper limit",
+      "source": "Federal Reserve Bank of St. Louis (FRED)",
+      "source_code": "fred",
+      "source_url": "https://fred.stlouisfed.org/series/DFEDTARU",
+      "source_title": "DFEDTARU",
+      "units": "% per year",
+      "frequency": "daily",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "none",
+      "latest_observation_date": "2026-11-25",
+      "latest_value": 4.0,
+      "rows": 4712,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value is a multiple of 0.25",
+        "passed": true,
+        "detail": "4347 values checked, min 0.25, max 5.5"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:39Z"
+    },
+    "cpi_us": {
+      "id": "CPIAUCSL",
+      "name": "US CPI, all urban consumers, all items, SA",
+      "source": "Federal Reserve Bank of St. Louis (FRED)",
+      "source_code": "fred",
+      "source_url": "https://fred.stlouisfed.org/series/CPIAUCSL",
+      "source_title": "CPIAUCSL",
+      "units": "Index 1982–84 = 100",
+      "frequency": "monthly",
+      "seasonal_adjustment": "Seasonally adjusted (BLS)",
+      "transformation": "none (input to the real exchange rate)",
+      "latest_observation_date": "2026-10-01",
+      "latest_value": 337.476,
+      "rows": 153,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 100 and 1000",
+        "passed": true,
+        "detail": "141 values checked, min 234.7, max 337.5"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:39Z"
+    },
+    "ust10": {
+      "id": "DGS10",
+      "name": "US 10-year Treasury constant maturity yield",
+      "source": "Federal Reserve Bank of St. Louis (FRED)",
+      "source_code": "fred",
+      "source_url": "https://fred.stlouisfed.org/series/DGS10",
+      "source_title": "DGS10",
+      "units": "% per year",
+      "frequency": "business-daily",
+      "seasonal_adjustment": "Not seasonally adjusted",
+      "transformation": "monthly mean of daily values in yields_monthly.csv",
+      "latest_observation_date": "2026-11-24",
+      "latest_value": 4.91,
+      "rows": 3225,
+      "fetch_status": "ok",
+      "fetch_error": null,
+      "sanity_check": {
+        "rule": "value between 0 and 20",
+        "passed": true,
+        "detail": "2975 values checked, min 0.52, max 5.31"
+      },
+      "fetched_at_utc": "2026-11-26T03:57:40Z"
+    }
+  },
+  "derived": {
+    "policy_spread": {
+      "name": "Policy rate spread: Banxico target − Fed target upper limit",
+      "units": "percentage points",
+      "frequency": "daily",
+      "inputs": [
+        "banxico_target",
+        "fed_upper"
+      ],
+      "transformation": "spread_t = banxico_target_t − fed_upper_t (both carried forward on calendar days; stops at the earlier of the two latest dates)",
+      "latest_observation_date": "2026-11-25",
+      "latest_value": 2.25,
+      "rows": 4712
+    },
+    "rer": {
+      "name": "Real exchange rate MXN vs USD (own calculation and Banxico), 2015 = 100",
+      "units": "Index, 2015 average = 100 (up = real peso depreciation)",
+      "frequency": "monthly",
+      "inputs": [
+        "fix",
+        "cpi_us",
+        "inpc",
+        "rer_banxico"
+      ],
+      "transformation": "RER_t = S_t × CPI_US_t / INPC_t, S_t = monthly mean of FIX; rebased: 100 × RER_t / mean(RER over 2015)",
+      "latest_observation_date": "2026-10-01",
+      "latest_value": 98.62487454469826,
+      "rows": 153,
+      "rer_correlation": 0.9987,
+      "rer_correlation_n": 141,
+      "rer_correlation_period": "2015-01 to 2026-10"
+    },
+    "yields": {
+      "name": "10-year yields: Bono M auction vs US Treasury, and spread",
+      "units": "% per year; spread in percentage points",
+      "frequency": "auction",
+      "inputs": [
+        "mbono10",
+        "ust10"
+      ],
+      "transformation": "spread = Bono M 10y auction yield_t − DGS10 on the auction date (or the last earlier US business day)",
+      "latest_observation_date": "2026-11-19",
+      "latest_value": 4.239999999999999,
+      "rows": 118
+    },
+    "yields_monthly": {
+      "name": "10-year yields, monthly averages",
+      "units": "% per year; spread in percentage points",
+      "frequency": "monthly",
+      "inputs": [
+        "mbono10",
+        "ust10"
+      ],
+      "transformation": "monthly mean of auction yields (Bono M) and of daily DGS10; spread = difference of the monthly means (months with an auction only)",
+      "latest_observation_date": "2026-11-01",
+      "latest_value": 4.978125,
+      "rows": 155
+    }
+  }
+}
