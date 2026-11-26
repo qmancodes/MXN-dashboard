@@ -206,7 +206,7 @@ def pct_change_by_date(df: pd.DataFrame, months: int) -> pd.Series:
     return pd.Series(100 * (df["value"].to_numpy() / lagged - 1), index=df.index)
 
 
-def transform(key: str, spec: dict, df: pd.DataFrame) -> pd.DataFrame:
+def transform(key: str, spec: dict, df: pd.DataFrame, display_start: pd.Timestamp | None = None) -> pd.DataFrame:
     df = df.copy()
     if key == "gdp":
         df["yoy"] = pct_change_by_date(df, 12)
@@ -227,8 +227,10 @@ def transform(key: str, spec: dict, df: pd.DataFrame) -> pd.DataFrame:
         prev = df["value"].shift(1)
         df["decision"] = ((df["value"] != prev) & prev.notna() & df["value"].notna()).astype(int)
     elif key == "rer_banxico":
-        base = df.loc[df["date"].dt.year == 2015, "value"].mean()
-        df["rebased_2015"] = 100 * df["value"] / base
+        # 100 = historical average of the dashboard sample (display_start to the latest observation)
+        in_sample = df["date"] >= display_start if display_start is not None else df["date"].notna()
+        base = df.loc[in_sample, "value"].mean()
+        df["rebased_avg"] = 100 * df["value"] / base
     return df
 
 
@@ -260,14 +262,15 @@ def derive(frames: dict[str, pd.DataFrame], display_start: pd.Timestamp) -> tupl
         today_ms = pd.Timestamp(date.today()).to_period("M").to_timestamp()
         d = d[d.index < today_ms]
         d["rer_raw"] = d["fix_avg"] * d["cpi_us"] / d["inpc"]
-        base = d.loc[d.index.year == 2015, "rer_raw"].mean()
-        d["rer_own_2015"] = 100 * d["rer_raw"] / base
+        # 100 = average of the dashboard sample (display_start to the latest month)
+        base = d.loc[d.index >= display_start, "rer_raw"].mean()
+        d["rer_own_idx"] = 100 * d["rer_raw"] / base
         if "rer_banxico" in frames:
             rb = frames["rer_banxico"].set_index("date")["value"].rename("rer_banxico_raw")
             d = d.join(rb, how="left")
-            bbase = d.loc[d.index.year == 2015, "rer_banxico_raw"].mean()
-            d["rer_banxico_2015"] = 100 * d["rer_banxico_raw"] / bbase
-            both = d.loc[d.index >= display_start, ["rer_own_2015", "rer_banxico_2015"]].dropna()
+            bbase = d.loc[d.index >= display_start, "rer_banxico_raw"].mean()
+            d["rer_banxico_idx"] = 100 * d["rer_banxico_raw"] / bbase
+            both = d.loc[d.index >= display_start, ["rer_own_idx", "rer_banxico_idx"]].dropna()
             if len(both) >= 12:
                 extra["rer_correlation"] = round(float(both.corr().iloc[0, 1]), 4)
                 extra["rer_correlation_n"] = int(len(both))
@@ -483,7 +486,7 @@ def main() -> int:
             else:
                 r.status = "failed"
         if r.frame is not None:
-            full = transform(key, spec, r.frame)
+            full = transform(key, spec, r.frame, display_start)
             r.sanity = sanity_check(spec, full, display_start)
             frames[key] = full
             if r.status == "ok":
@@ -500,7 +503,7 @@ def main() -> int:
         key = spec["key"]
         r = results[key]
         df = frames.get(key)
-        main_col = {"gdp": "value", "rer_banxico": "rebased_2015"}.get(key, "value")
+        main_col = {"gdp": "value", "rer_banxico": "rebased_avg"}.get(key, "value")
         ld, lv = latest(df, main_col) if df is not None else (None, None)
         series_meta[key] = {
             "id": str(spec["id"]),
@@ -525,7 +528,7 @@ def main() -> int:
     derived_meta: dict = {}
     for d in cfg.get("derived", []):
         ddf = derived.get(d["key"])
-        col = {"policy_spread": "spread", "rer": "rer_own_2015", "yields": "spread",
+        col = {"policy_spread": "spread", "rer": "rer_own_idx", "yields": "spread",
                "yields_monthly": "ust10_avg"}[d["key"]]
         ld, lv = latest(ddf, col) if ddf is not None else (None, None)
         derived_meta[d["key"]] = {**{k: d[k] for k in ("name", "units", "frequency", "inputs", "transformation")},

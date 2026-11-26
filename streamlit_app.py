@@ -231,8 +231,8 @@ if (k := last_two(data.get("banxico_target"), "value")):
     tiles.append(("Banxico target rate", f"{fmt(k[0])}%", f"{signed(k[1])} pp vs previous observation{extra}", f"{k[2]:%Y-%m-%d}"))
 if (k := last_two(data.get("fix"), "value")):
     tiles.append(("FIX, MXN per USD", fmt(k[0], 4), f"{signed(k[1], 4)} vs previous business day (up = weaker peso)", f"{k[2]:%Y-%m-%d}"))
-if (k := last_two(data.get("rer"), "rer_own_2015")):
-    tiles.append(("Real exchange rate", fmt(k[0], 1), f"2015 = 100; {signed(k[1], 1)} vs previous month (up = real depreciation)", f"{k[2]:%b %Y}"))
+if (k := last_two(data.get("rer"), "rer_own_idx")):
+    tiles.append(("Real exchange rate", fmt(k[0], 1), f"sample average = 100; {signed(k[1], 1)} vs previous month (up = real depreciation)", f"{k[2]:%b %Y}"))
 if (k := last_two(data.get("yields"), "mbono10")):
     tiles.append(("Bono M 10y (auction)", f"{fmt(k[0])}%", f"{signed(k[1])} pp vs previous auction", f"{k[2]:%Y-%m-%d}"))
 
@@ -398,28 +398,28 @@ def chart_fix():
 
 def chart_rer():
     st.subheader("6. Real exchange rate, MXN vs USD")
-    st.caption("Index, 2015 average = 100. **Up = real depreciation of the peso** (Mexico becomes relatively cheaper).")
+    st.caption("Index, sample average (since Jan 2015) = 100. **Up = real depreciation of the peso** (Mexico becomes relatively cheaper).")
     r = data.get("rer")
     if r is None:
         return empty_note()
     r = window(r, range_start([r]))
-    fig = go.Figure([line("Own calculation: FIX × CPI US / INPC", r["date"], r["rer_own_2015"], MX)])
-    if "rer_banxico_2015" in r and r["rer_banxico_2015"].notna().any():
-        fig.add_trace(line("Banxico bilateral RER (SR1504)", r["date"], r["rer_banxico_2015"], REF, dash="dash"))
+    fig = go.Figure([line("Own calculation: FIX × CPI US / INPC", r["date"], r["rer_own_idx"], MX)])
+    if "rer_banxico_idx" in r and r["rer_banxico_idx"].notna().any():
+        fig.add_trace(line("Banxico bilateral RER (SR1504)", r["date"], r["rer_banxico_idx"], REF, dash="dash"))
     fig.add_hline(y=100, line=dict(color=AXIS, width=1))
-    show(base_layout(fig, ytitle="Index, 2015 = 100"))
+    show(base_layout(fig, ytitle="Index, sample average = 100"))
     rr = derived_meta.get("rer", {})
     if "rer_correlation" in rr:
-        st.caption(f"*Correlation between the two series (2015 = 100): {rr['rer_correlation']:.3f} over "
+        st.caption(f"*Correlation between the two series (sample average = 100): {rr['rer_correlation']:.3f} over "
                    f"{rr['rer_correlation_n']} months ({rr['rer_correlation_period']}). Banxico's index uses the FIX by "
                    f"settlement date and US CPI not seasonally adjusted; the own calculation uses the FIX by "
                    f"determination date and US CPI seasonally adjusted.*")
-    footer([{"derived": "rer", "label": "Own real exchange rate (rebased 2015 = 100)"},
+    footer([{"derived": "rer", "label": "Own real exchange rate (rebased, sample average = 100)"},
             {"series": "rer_banxico", "label": "Banxico bilateral real exchange rate index vs the US",
-             "transformation": "rebased_2015 = 100 × value_t / mean(value over 2015); Banxico: an increase is a real depreciation"},
+             "transformation": "rebased_avg = 100 × value_t / mean(value over the dashboard sample); Banxico: an increase is a real depreciation"},
             {"series": "cpi_us", "label": "US CPI (input)"},
             {"series": "inpc", "label": "Mexico INPC headline (input)"}])
-    data_table(r, "rer", ["fix_avg", "cpi_us", "inpc", "rer_own_2015", "rer_banxico_2015"])
+    data_table(r, "rer", ["fix_avg", "cpi_us", "inpc", "rer_own_idx", "rer_banxico_idx"])
 
 
 def chart_yields():

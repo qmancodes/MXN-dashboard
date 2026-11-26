@@ -327,22 +327,22 @@
     const c = C();
     const r = state.data.rer;
     const L = baseLayout();
-    ytitle(L, "yaxis", "Index, 2015 = 100");
+    ytitle(L, "yaxis", "Index, sample average = 100");
     L.xaxis.hoverformat = "%b %Y";
     L.shapes.push({ type: "line", xref: "paper", x0: 0, x1: 1, y0: 100, y1: 100, line: { color: c.axis, width: 1 } });
     const traces = [];
     if (r) {
-      traces.push(line("Own calculation: FIX × CPI US / INPC", r.date, r.rer_own_2015, c.mx, { unit: "" }));
-      if (r.rer_banxico_2015 && r.rer_banxico_2015.some((v) => v !== null))
-        traces.push(line("Banxico bilateral RER (SR1504)", r.date, r.rer_banxico_2015, c.ref, { unit: "", dash: "dash" }));
+      traces.push(line("Own calculation: FIX × CPI US / INPC", r.date, r.rer_own_idx, c.mx, { unit: "" }));
+      if (r.rer_banxico_idx && r.rer_banxico_idx.some((v) => v !== null))
+        traces.push(line("Banxico bilateral RER (SR1504)", r.date, r.rer_banxico_idx, c.ref, { unit: "", dash: "dash" }));
     }
     draw("chart-rer", traces, L);
     const rer = ((state.meta || {}).derived || {}).rer || {};
     document.getElementById("rer-note").textContent = rer.rer_correlation !== undefined
-      ? `Correlation between the two series (2015 = 100): ${rer.rer_correlation.toFixed(3)} over ${rer.rer_correlation_n} months (${rer.rer_correlation_period}). Banxico's index uses the FIX by settlement date and US CPI not seasonally adjusted; the own calculation uses the FIX by determination date and US CPI seasonally adjusted.`
+      ? `Correlation between the two series (sample average = 100): ${rer.rer_correlation.toFixed(3)} over ${rer.rer_correlation_n} months (${rer.rer_correlation_period}). Banxico's index uses the FIX by settlement date and US CPI not seasonally adjusted; the own calculation uses the FIX by determination date and US CPI seasonally adjusted.`
       : "";
-    footer("foot-rer", [{ derived: "rer", label: "Own real exchange rate (rebased 2015 = 100)" },
-      { series: "rer_banxico", label: "Banxico bilateral real exchange rate index vs the US", transformation: "rebased_2015 = 100 × value_t / mean(value over 2015); Banxico: an increase is a real depreciation" },
+    footer("foot-rer", [{ derived: "rer", label: "Own real exchange rate (rebased, sample average = 100)" },
+      { series: "rer_banxico", label: "Banxico bilateral real exchange rate index vs the US", transformation: "rebased_avg = 100 × value_t / mean(value over the dashboard sample); Banxico: an increase is a real depreciation" },
       { series: "cpi_us", label: "US CPI (input)" }, { series: "inpc", label: "Mexico INPC headline (input)" }]);
   }
 
@@ -396,8 +396,8 @@
     }
     const f = kpiFrom(D.fix, "value");
     if (f) out.push(tile("FIX, MXN per USD", fmt(f.v, 4), "", `${signed(f.dv, 4)} vs previous business day (up = weaker peso)`, f.date));
-    const r = kpiFrom(D.rer, "rer_own_2015");
-    if (r) out.push(tile("Real exchange rate", fmt(r.v, 1), " (2015=100)", `${signed(r.dv, 1)} vs previous month (up = real depreciation)`, monthLabel(r.date)));
+    const r = kpiFrom(D.rer, "rer_own_idx");
+    if (r) out.push(tile("Real exchange rate", fmt(r.v, 1), " (avg = 100)", `${signed(r.dv, 1)} vs previous month (up = real depreciation)`, monthLabel(r.date)));
     const y = kpiFrom(D.yields, "mbono10");
     if (y) out.push(tile("Bono M 10y (auction)", fmt(y.v, 2), "%", `${signed(y.dv, 2)} pp vs previous auction`, y.date));
     document.getElementById("kpis").innerHTML = out.join("") || '<div class="kpi">No data yet.</div>';

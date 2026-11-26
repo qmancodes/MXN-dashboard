@@ -37,8 +37,8 @@ Sample: January 2015 to the latest observation. The CSVs also hold 2014 so that 
 | Fed target range lower / upper | FRED | `DFEDTARL` / `DFEDTARU` | % per year | Daily | Not SA | shaded range |
 | Policy spread | computed | `policy_spread` | percentage points | Daily | n/a | Banxico target − Fed upper limit |
 | FIX exchange rate | Banxico SIE | `SF43718` | MXN per 1 USD (**up = weaker peso**) | Business days | Not SA | 20-business-day moving average |
-| Real exchange rate, Banxico | Banxico SIE | `SR1504` | Index (Banxico base) | Monthly | Not SA | rebased to 2015 average = 100; **up = real peso depreciation** |
-| Real exchange rate, own | computed | `rer` | Index, 2015 = 100 | Monthly | n/a | RER_t = S_t × CPI_US_t / INPC_t, S_t = monthly mean FIX; **up = real peso depreciation** |
+| Real exchange rate, Banxico | Banxico SIE | `SR1504` | Index (Banxico base) | Monthly | Not SA | rebased so the sample average (Jan 2015 to latest) = 100; **up = real peso depreciation** |
+| Real exchange rate, own | computed | `rer` | Index, sample average = 100 | Monthly | n/a | RER_t = S_t × CPI_US_t / INPC_t, S_t = monthly mean FIX; **up = real peso depreciation** |
 | US CPI | FRED | `CPIAUCSL` | Index 1982–84 = 100 | Monthly | Seasonally adjusted | input to own RER |
 | Bono M 10-year | Banxico SIE | `SF44071` | % per year | Primary auction (≈ every 4 weeks) | n/a | auction-date points; monthly mean of auctions |
 | US 10-year Treasury | FRED | `DGS10` | % per year | Business days | Not SA | monthly average for the long view |
@@ -60,7 +60,7 @@ All IDs were checked in the official catalogs on 2026-11-24:
 ### Real exchange rate: correlation of the two versions
 
 <!-- RER_CORRELATION_START -->
-Latest run: correlation between the own RER and Banxico's SR1504, both rebased to 2015 = 100, is **0.999** (141 months, 2015-01 to 2026-10). Updated automatically by `scripts/verify_sample.py`.
+Not computed yet: it appears here after the first refresh that has both series.
 <!-- RER_CORRELATION_END -->
 
 ## Streamlit app
@@ -137,7 +137,7 @@ For value checks, fill in the "Source value", "Match?" and "Checked on" columns 
 - **GDP and IGAE revisions:** INEGI revises past quarters and months (and re-estimates seasonal factors), so values can change between refreshes. The fail-safe compares row counts and dates, not values, so revisions flow through.
 - **2020 ENOE gap:** INEGI suspended the ENOE in April–June 2020 and ran the ETOE telephone survey instead. Those months are forced to missing and shown as a gap; they are never interpolated.
 - **FIX dating:** Banxico dates the FIX by the day it is determined (`SF43718`). It is published in the Diario Oficial the next banking day and used for payments the day after; the settlement-date series is `SF60653`.
-- **Real exchange rate base and direction:** both RER lines are rebased to the 2015 average = 100. Up = real depreciation of the peso (Mexico relatively cheaper). The own calculation mixes US CPI SA with Mexican INPC NSA, as the spec asks, so it carries a small seasonal pattern that Banxico's index does not.
+- **Real exchange rate base and direction:** both RER lines are rebased so that 100 = the average of the whole dashboard sample (Jan 2015 to the latest month). The base moves slightly as new months arrive, so past index values shift by a small amount at each refresh. Up = real depreciation of the peso (Mexico relatively cheaper). The own calculation mixes US CPI SA with Mexican INPC NSA, as the spec asks, so it carries a small seasonal pattern that Banxico's index does not.
 - **INPC basket update:** the INPC IDs are INEGI's series with the 2024 basket and weights update (same base, 2Q July 2018 = 100).
 - **10-year Bono M:** auction yields, not a daily market yield (see above). The US 10-year is plotted as a monthly average of daily yields for the long view; the spread uses the US daily yield on each auction date.
 - **Running month:** the own RER drops the current month until it is complete.

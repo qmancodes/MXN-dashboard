@@ -74,8 +74,8 @@ def note_for(key: str, row: pd.Series, freq: str) -> str:
         parts.append("FIX dated by determination date")
     elif key == "mbono10":
         parts.append("auction date")
-    elif key == "rer_banxico" and pd.notna(row.get("rebased_2015")):
-        parts.append(f"dashboard rebased 2015=100: {row['rebased_2015']:.2f}")
+    elif key == "rer_banxico" and pd.notna(row.get("rebased_avg")):
+        parts.append(f"dashboard index (sample average = 100): {row['rebased_avg']:.2f}")
     if freq == "monthly":
         parts.append(f"month {row['date']:%Y-%m}")
     return "; ".join(parts)
@@ -177,7 +177,7 @@ def sanity_section(meta: dict) -> str:
     rer = meta.get("derived", {}).get("rer", {})
     if "rer_correlation" in rer:
         lines += ["", f"Real exchange rate cross-check: correlation between the own calculation and Banxico's "
-                      f"SR1504 (both 2015 = 100) is **{rer['rer_correlation']:.3f}** over {rer['rer_correlation_n']} "
+                      f"SR1504 (both sample average = 100) is **{rer['rer_correlation']:.3f}** over {rer['rer_correlation_n']} "
                       f"months ({rer['rer_correlation_period']})."]
     return "\n".join(lines)
 
@@ -222,7 +222,7 @@ def update_readme(meta: dict) -> None:
     if start not in text or end not in text:
         return
     if "rer_correlation" in rer:
-        body = (f"Latest run: correlation between the own RER and Banxico's SR1504, both rebased to 2015 = 100, is "
+        body = (f"Latest run: correlation between the own RER and Banxico's SR1504, both rebased to the sample average = 100, is "
                 f"**{rer['rer_correlation']:.3f}** ({rer['rer_correlation_n']} months, {rer['rer_correlation_period']}). "
                 f"Updated automatically by `scripts/verify_sample.py`.")
     else:

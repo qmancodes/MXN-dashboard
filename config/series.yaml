@@ -66,9 +66,9 @@ series:
     units: "Index (Banxico base; increase = real depreciation of the peso)"
     frequency: monthly
     seasonal_adjustment: "Not seasonally adjusted"
-    transformation: "rebased_2015 = 100 × value_t / mean(value over 2015)"
+    transformation: "rebased_avg = 100 × value_t / mean(value over the dashboard sample, Jan 2015 to latest)"
     title_must_contain: "real"
-    sanity: {type: range, min: 30, max: 300, column: rebased_2015}
+    sanity: {type: range, min: 30, max: 300, column: rebased_avg}
 
   # ---------------- INEGI BIE ----------------
   - key: gdp
@@ -193,11 +193,11 @@ derived:
     transformation: "spread_t = banxico_target_t − fed_upper_t (both carried forward on calendar days; stops at the earlier of the two latest dates)"
 
   - key: rer
-    name: "Real exchange rate MXN vs USD (own calculation and Banxico), 2015 = 100"
-    units: "Index, 2015 average = 100 (up = real peso depreciation)"
+    name: "Real exchange rate MXN vs USD (own calculation and Banxico), sample average = 100"
+    units: "Index, average of the sample since Jan 2015 = 100 (up = real peso depreciation)"
     frequency: monthly
     inputs: [fix, cpi_us, inpc, rer_banxico]
-    transformation: "RER_t = S_t × CPI_US_t / INPC_t, S_t = monthly mean of FIX; rebased: 100 × RER_t / mean(RER over 2015)"
+    transformation: "RER_t = S_t × CPI_US_t / INPC_t, S_t = monthly mean of FIX; rebased: 100 × RER_t / mean(RER over the dashboard sample, Jan 2015 to latest)"
 
   - key: yields
     name: "10-year yields: Bono M auction vs US Treasury, and spread"
