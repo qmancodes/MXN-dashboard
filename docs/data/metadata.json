@@ -1,11 +1,11 @@
 {
   "title": "Mexico macro dashboard",
-  "last_successful_refresh_utc": "2026-11-27 02:22",
-  "last_successful_refresh_mexico_city": "2026-11-26 20:22",
-  "run_started_utc": "2026-11-27 02:22",
-  "run_finished_utc": "2026-11-27 02:22",
-  "run_id": "45927860604",
-  "run_url": "https://github.com/qmancodes/MXN-dashboard/actions/runs/45927860604",
+  "last_successful_refresh_utc": "2026-11-28 02:06",
+  "last_successful_refresh_mexico_city": "2026-11-27 20:06",
+  "run_started_utc": "2026-11-28 02:06",
+  "run_finished_utc": "2026-11-28 02:06",
+  "run_id": "46096407016",
+  "run_url": "https://github.com/qmancodes/MXN-dashboard/actions/runs/46096407016",
   "repository": "qmancodes/MXN-dashboard",
   "overall_status": "success",
   "failed_series": [],
@@ -22,17 +22,17 @@
       "frequency": "business-daily",
       "seasonal_adjustment": "Not seasonally adjusted",
       "transformation": "ma20 = mean of the last 20 business-day observations",
-      "latest_observation_date": "2026-11-26",
-      "latest_value": 19.7203,
-      "rows": 3244,
+      "latest_observation_date": "2026-11-27",
+      "latest_value": 19.6598,
+      "rows": 3245,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value between 10 and 30",
         "passed": true,
-        "detail": "2993 values checked, min 14.56, max 25.12"
+        "detail": "2994 values checked, min 14.56, max 25.12"
       },
-      "fetched_at_utc": "2026-11-27T02:22:04Z"
+      "fetched_at_utc": "2026-11-28T02:06:38Z"
     },
     "banxico_target": {
       "id": "SF61745",
@@ -45,17 +45,17 @@
       "frequency": "daily",
       "seasonal_adjustment": "Not applicable",
       "transformation": "decision = 1 on the first day a new target level is in force (value_t != value_{t-1})",
-      "latest_observation_date": "2026-11-27",
+      "latest_observation_date": "2026-11-28",
       "latest_value": 6.25,
-      "rows": 4701,
+      "rows": 4702,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value is a multiple of 0.25",
         "passed": true,
-        "detail": "4337 values checked, min 3, max 11.25"
+        "detail": "4338 values checked, min 3, max 11.25"
       },
-      "fetched_at_utc": "2026-11-27T02:22:06Z"
+      "fetched_at_utc": "2026-11-28T02:06:38Z"
     },
     "mbono10": {
       "id": "SF44071",
@@ -78,7 +78,7 @@
         "passed": true,
         "detail": "109 values checked, min 5.31, max 10.43"
       },
-      "fetched_at_utc": "2026-11-27T02:22:07Z"
+      "fetched_at_utc": "2026-11-28T02:06:39Z"
     },
     "rer_banxico": {
       "id": "SR1504",
@@ -101,7 +101,7 @@
         "passed": true,
         "detail": "142 values checked, min 84.45, max 127.3"
       },
-      "fetched_at_utc": "2026-11-27T02:22:08Z"
+      "fetched_at_utc": "2026-11-28T02:06:40Z"
     },
     "gdp": {
       "id": "736181",
@@ -124,7 +124,7 @@
         "passed": true,
         "detail": "47 values checked, min -20.47, max 22.51"
       },
-      "fetched_at_utc": "2026-11-27T02:22:10Z"
+      "fetched_at_utc": "2026-11-28T02:06:41Z"
     },
     "igae": {
       "id": "737219",
@@ -147,7 +147,7 @@
         "passed": true,
         "detail": "141 values checked, min -23.25, max 27.66"
       },
-      "fetched_at_utc": "2026-11-27T02:22:12Z"
+      "fetched_at_utc": "2026-11-28T02:06:43Z"
     },
     "inpc": {
       "id": "910392",
@@ -170,7 +170,7 @@
         "passed": true,
         "detail": "142 values checked, min 2.131, max 8.7"
       },
-      "fetched_at_utc": "2026-11-27T02:22:14Z"
+      "fetched_at_utc": "2026-11-28T02:06:45Z"
     },
     "inpc_core": {
       "id": "910393",
@@ -193,7 +193,7 @@
         "passed": true,
         "detail": "142 values checked, min 2.299, max 8.515"
       },
-      "fetched_at_utc": "2026-11-27T02:22:16Z"
+      "fetched_at_utc": "2026-11-28T02:06:47Z"
     },
     "unemployment": {
       "id": "444884",
@@ -216,7 +216,7 @@
         "passed": true,
         "detail": "139 values checked, min 2.48, max 5.008"
       },
-      "fetched_at_utc": "2026-11-27T02:22:18Z"
+      "fetched_at_utc": "2026-11-28T02:06:48Z"
     },
     "dff": {
       "id": "DFF",
@@ -229,17 +229,17 @@
       "frequency": "daily",
       "seasonal_adjustment": "Not seasonally adjusted",
       "transformation": "none",
-      "latest_observation_date": "2026-11-24",
+      "latest_observation_date": "2026-11-26",
       "latest_value": 3.88,
-      "rows": 4711,
+      "rows": 4713,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value between 0 and 20",
         "passed": true,
-        "detail": "4346 values checked, min 0.04, max 5.33"
+        "detail": "4348 values checked, min 0.04, max 5.33"
       },
-      "fetched_at_utc": "2026-11-27T02:22:20Z"
+      "fetched_at_utc": "2026-11-28T02:06:49Z"
     },
     "fed_lower": {
       "id": "DFEDTARL",
@@ -252,17 +252,17 @@
       "frequency": "daily",
       "seasonal_adjustment": "Not seasonally adjusted",
       "transformation": "none",
-      "latest_observation_date": "2026-11-26",
+      "latest_observation_date": "2026-11-27",
       "latest_value": 3.75,
-      "rows": 4713,
+      "rows": 4714,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value is a multiple of 0.25",
         "passed": true,
-        "detail": "4348 values checked, min 0, max 5.25"
+        "detail": "4349 values checked, min 0, max 5.25"
       },
-      "fetched_at_utc": "2026-11-27T02:22:21Z"
+      "fetched_at_utc": "2026-11-28T02:06:50Z"
     },
     "fed_upper": {
       "id": "DFEDTARU",
@@ -275,17 +275,17 @@
       "frequency": "daily",
       "seasonal_adjustment": "Not seasonally adjusted",
       "transformation": "none",
-      "latest_observation_date": "2026-11-26",
+      "latest_observation_date": "2026-11-27",
       "latest_value": 4.0,
-      "rows": 4713,
+      "rows": 4714,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value is a multiple of 0.25",
         "passed": true,
-        "detail": "4348 values checked, min 0.25, max 5.5"
+        "detail": "4349 values checked, min 0.25, max 5.5"
       },
-      "fetched_at_utc": "2026-11-27T02:22:23Z"
+      "fetched_at_utc": "2026-11-28T02:06:51Z"
     },
     "cpi_us": {
       "id": "CPIAUCSL",
@@ -308,7 +308,7 @@
         "passed": true,
         "detail": "141 values checked, min 234.7, max 337.5"
       },
-      "fetched_at_utc": "2026-11-27T02:22:23Z"
+      "fetched_at_utc": "2026-11-28T02:06:52Z"
     },
     "ust10": {
       "id": "DGS10",
@@ -321,17 +321,17 @@
       "frequency": "business-daily",
       "seasonal_adjustment": "Not seasonally adjusted",
       "transformation": "monthly mean of daily values in yields_monthly.csv",
-      "latest_observation_date": "2026-11-24",
-      "latest_value": 4.91,
-      "rows": 3225,
+      "latest_observation_date": "2026-11-25",
+      "latest_value": 4.85,
+      "rows": 3226,
       "fetch_status": "ok",
       "fetch_error": null,
       "sanity_check": {
         "rule": "value between 0 and 20",
         "passed": true,
-        "detail": "2975 values checked, min 0.52, max 5.31"
+        "detail": "2976 values checked, min 0.52, max 5.31"
       },
-      "fetched_at_utc": "2026-11-27T02:22:24Z"
+      "fetched_at_utc": "2026-11-28T02:06:52Z"
     }
   },
   "derived": {
@@ -344,9 +344,9 @@
         "fed_upper"
       ],
       "transformation": "spread_t = banxico_target_t − fed_upper_t (both carried forward on calendar days; stops at the earlier of the two latest dates)",
-      "latest_observation_date": "2026-11-26",
+      "latest_observation_date": "2026-11-27",
       "latest_value": 2.25,
-      "rows": 4713
+      "rows": 4714
     },
     "rer": {
       "name": "Real exchange rate MXN vs USD (own calculation and Banxico), sample average = 100",
@@ -389,7 +389,7 @@
       ],
       "transformation": "monthly mean of auction yields (Bono M) and of daily DGS10; spread = difference of the monthly means (months with an auction only)",
       "latest_observation_date": "2026-11-01",
-      "latest_value": 4.978125,
+      "latest_value": 4.970588235294118,
       "rows": 155
     }
   }
